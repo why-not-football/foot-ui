@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  title: API Title
+  title: Why not football ?
   version: '1.0'
 servers:
   - url: https://localhost:8080
@@ -184,6 +184,26 @@ paths:
               schema: 
                 items:
                   $ref: '#/components/schemas/Tournament'
+  /tournament/{id}/teams:
+    get:
+      tags:
+        - "tournament"
+      operationId: getAllTournamentTeams
+      summary: get all team in one tournament
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: 
+            type: integer
+      responses:
+        '200':
+          description: OK 
+          content:
+            application/json:
+              schema: 
+                items:
+                  $ref: '#/components/schemas/Team'
   /tournament/team:
     post:
       tags:
@@ -279,8 +299,6 @@ components:
               type: string
             phone:
               type: string
-        tournament: 
-          $ref: '#/components/schemas/Tournament'
         paying:
           $ref: '#/components/schemas/EnablePaying'
         status: 
@@ -293,8 +311,6 @@ components:
         endDatetime:
           type: integer
         ownerId:
-          type: integer
-        tournamentId:
           type: integer
         statidum:
           $ref: '#/components/schemas/Stadium'
