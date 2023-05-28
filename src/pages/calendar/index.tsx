@@ -1,8 +1,9 @@
 import timeGridPlugin from '@fullcalendar/timegrid'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
+import listPlugin from '@fullcalendar/list';
 import FullCalendar from '@fullcalendar/react'
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
 export default function index() {
   const calendarRef = React.useRef(null);
@@ -10,13 +11,13 @@ export default function index() {
   return (
     <div style={{ width: '90vw'}}>
      <FullCalendar
-        plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin,  ]}
-        initialView="timeGrid"
+        plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin ]}
+        initialView="timeGridWeek"
         timeZone='local'
         headerToolbar={{
-          left: "prev, next today",
+          left: "prev next today",
           center: "title",
-          right: "timeGridWeek,timeGridDay"
+          right: "timeGridWeek,timeGridDay,listWeek"
         }}
         ref={calendarRef}
         events={[
