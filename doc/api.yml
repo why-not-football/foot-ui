@@ -1,28 +1,28 @@
-openapi: '3.0.3'
+openapi: "3.0.3"
 info:
   title: Why not football ?
-  version: '1.0'
+  version: "1.0"
 servers:
   - url: https://localhost:8080
 security:
-  - BearerAuth : []
+  - BearerAuth: []
 
 paths:
   /login:
     post:
       tags:
         - "security"
-      operationId: Login 
+      operationId: Login
       summary: login to the server
       description: login username by name and password
-      requestBody: 
+      requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/LoginInfo"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -32,11 +32,11 @@ paths:
     get:
       tags:
         - "security"
-      operationId: Whoami 
-      summary:  get current logged user 
-      description: get current logged user 
+      operationId: Whoami
+      summary: get current logged user
+      description: get current logged user
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
@@ -53,137 +53,137 @@ paths:
         required: true
         content:
           application/json:
-            schema: 
+            schema:
               $ref: "#/components/schemas/User"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/User"
   /user/id/{userId}:
     get:
       tags:
         - "user"
       operationId: getUserById
-      summary:  get user by id
+      summary: get user by id
       parameters:
-        - name: userId 
+        - name: userId
           in: path
           required: true
-          schema: 
+          schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/User"
   /user/name/{userName}:
     get:
       tags:
         - "user"
       operationId: getUserByUsername
-      summary:  get user by id
+      summary: get user by name
       parameters:
         - name: userName
           in: path
           required: true
-          schema: 
+          schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 $ref: "#/components/schemas/User"
   /booking:
-    put: 
+    put:
       tags:
         - "booking"
       operationId: createBooking
-      summary: command a reservation 
+      summary: command a reservation
       requestBody:
         content:
           application/json:
-            schema: 
-              $ref: '#/components/schemas/Booking'
+            schema:
+              $ref: "#/components/schemas/Booking"
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/Booking'
+              schema:
+                $ref: "#/components/schemas/Booking"
     get:
       tags:
         - "booking"
       operationId: getAllBooking
-      summary: get all booking 
+      summary: get all booking
       parameters:
-        - name: ownerId 
+        - name: ownerId
           in: query
           required: false
           schema:
             type: integer
-        - name: tournamentId 
+        - name: tournamentId
           in: query
           required: false
-          schema: 
+          schema:
             type: integer
         - name: datetime
           in: query
           required: false
-          schema: 
+          schema:
             type: string
         - name: stadiumId
           in: query
           required: false
-          schema: 
+          schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 items:
-                  $ref: '#/components/schemas/Booking'
+                  $ref: "#/components/schemas/Booking"
   /tournament:
     put:
       tags:
         - "tournament"
       operationId: CreateOrUpdateTournament
-      summary: create tournament 
+      summary: create tournament
       requestBody:
         required: true
         content:
           application/json:
-            schema: 
+            schema:
               $ref: "#/components/schemas/Tournament"
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/Tournament'
+              schema:
+                $ref: "#/components/schemas/Tournament"
     get:
       tags:
         - "tournament"
       operationId: getAllTournament
       summary: get all tournament
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 items:
-                  $ref: '#/components/schemas/Tournament'
+                  $ref: "#/components/schemas/Tournament"
   /tournament/{idTournament}/teams:
     get:
       tags:
@@ -194,72 +194,72 @@ paths:
         - name: idTournament
           in: path
           required: true
-          schema: 
+          schema:
             type: integer
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 items:
-                  $ref: '#/components/schemas/Team'
+                  $ref: "#/components/schemas/Team"
   /tournament/team:
     put:
       tags:
         - "tournament"
       operationId: createOrUpdateTeam
-      summary: create team 
+      summary: create team
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Team'
+              $ref: "#/components/schemas/Team"
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/Team'
+              schema:
+                $ref: "#/components/schemas/Team"
   /tournament/play:
     put:
       tags:
         - "tournament"
       operationId: CreateOrUpdatePlayAgainst
-      summary: Create play against 
+      summary: Create play against
       requestBody:
         required: true
         content:
           application/json:
-            schema: 
-              $ref: '#/components/schemas/PlayAgainst'
+            schema:
+              $ref: "#/components/schemas/PlayAgainst"
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/PlayAgainst'
+              schema:
+                $ref: "#/components/schemas/PlayAgainst"
     get:
       tags:
         - "tournament"
       operationId: getTournamentMatch
       summary: get tournament match
       parameters:
-        - name: date 
+        - name: date
           in: query
           required: false
-          schema: 
+          schema:
             type: string
       responses:
-        '200':
-          description: OK 
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/PlayAgainst'
+              schema:
+                $ref: "#/components/schemas/PlayAgainst"
 components:
   securitySchemes:
     BearerAuth:
@@ -268,20 +268,20 @@ components:
   schemas:
     User:
       properties:
-        id: 
+        id:
           type: integer
-        username: 
+        username:
           type: string
         phone:
           type: string
         role:
-          $ref: '#/components/schemas/EnableRole'
+          $ref: "#/components/schemas/EnableRole"
     EnableRole:
       type: string
       enum:
-        - ADMIN 
+        - ADMIN
         - SIMPLE
-   
+
     LoginInfo:
       properties:
         username:
@@ -304,13 +304,13 @@ components:
           format: date-time
         endDatetime:
           type: string
-          format: integer
+          format: date-time
         owner:
           type: string
         paying:
-          $ref: '#/components/schemas/EnablePaying'
-        status: 
-          $ref: '#/components/schemas/EnableBooking'
+          $ref: "#/components/schemas/EnablePaying"
+        status:
+          $ref: "#/components/schemas/EnableBooking"
     Tournament:
       properties:
         id:
@@ -321,15 +321,15 @@ components:
           type: string
         phone:
           type: string
-        startDate: 
+        startDate:
           type: string
           format: date
-        endDate: 
+        endDate:
           type: string
           format: date
     Team:
       properties:
-        id: 
+        id:
           type: integer
         name:
           type: string
@@ -337,32 +337,32 @@ components:
       properties:
         id:
           type: integer
-        teams: 
+        teams:
           type: array
           items:
-            $ref: '#/components/schemas/Team'
-        startDatetime: 
+            $ref: "#/components/schemas/Team"
+        startDatetime:
           type: string
           format: date-time
-        sendDatetime: 
+        endDatetime:
           type: string
           format: date-time
-        tournament: 
+        tournament:
           properties:
             id:
               type: integer
-            name: 
+            name:
               type: string
-        phase: 
-          $ref: '#/components/schemas/EnablePhase'
-        statidum:
-          $ref: '#/components/schemas/Stadium'
-        status: 
-          $ref: '#/components/schemas/EnableBooking'
+        phase:
+          $ref: "#/components/schemas/EnablePhase"
+        stadium:
+          $ref: "#/components/schemas/Stadium"
+        status:
+          $ref: "#/components/schemas/EnableBooking"
     EnablePhase:
       type: string
       enum:
-        - POOL 
+        - POOL
         - QUARTER_FINAL
         - SEMI_FINAL
         - FINAL
