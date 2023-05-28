@@ -43,10 +43,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
   /user:
-    post:
+    put:
       tags:
         - "user"
-      operationId: CreateUser
+      operationId: CreateOrUpdateUser
       summary: create User
       description: create User
       requestBody:
@@ -54,7 +54,7 @@ paths:
         content:
           application/json:
             schema: 
-              $ref: "#/components/schemas/CreateUser"
+              $ref: "#/components/schemas/User"
       responses:
         '200':
           description: OK
@@ -101,7 +101,7 @@ paths:
               schema: 
                 $ref: "#/components/schemas/User"
   /booking:
-    post: 
+    put: 
       tags:
         - "booking"
       operationId: createBooking
@@ -110,7 +110,7 @@ paths:
         content:
           application/json:
             schema: 
-              $ref: '#/components/schemas/CreateBooking'
+              $ref: '#/components/schemas/Booking'
       responses:
         '200':
           description: OK
@@ -153,17 +153,17 @@ paths:
                 items:
                   $ref: '#/components/schemas/Booking'
   /tournament:
-    post:
+    put:
       tags:
         - "tournament"
-      operationId: CreateTournament
+      operationId: CreateOrUpdateTournament
       summary: create tournament 
       requestBody:
         required: true
         content:
           application/json:
             schema: 
-              $ref: "#/components/schemas/CreateTournament"
+              $ref: "#/components/schemas/Tournament"
       responses:
         '200':
           description: OK 
@@ -184,14 +184,14 @@ paths:
               schema: 
                 items:
                   $ref: '#/components/schemas/Tournament'
-  /tournament/{id}/teams:
+  /tournament/{idTournament}/teams:
     get:
       tags:
         - "tournament"
       operationId: getAllTournamentTeams
       summary: get all team in one tournament
       parameters:
-        - name: id
+        - name: idTournament
           in: path
           required: true
           schema: 
@@ -205,19 +205,17 @@ paths:
                 items:
                   $ref: '#/components/schemas/Team'
   /tournament/team:
-    post:
+    put:
       tags:
         - "tournament"
-      operationId: createTeam
+      operationId: createOrUpdateTeam
       summary: create team 
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              properties:
-                name: 
-                  type: string
+              $ref: '#/components/schemas/Team'
       responses:
         '200':
           description: OK 
@@ -226,17 +224,35 @@ paths:
               schema: 
                 $ref: '#/components/schemas/Team'
   /tournament/play:
-    post:
+    put:
       tags:
         - "tournament"
-      operationId: CreatePlayAgainst
+      operationId: CreateOrUpdatePlayAgainst
       summary: Create play against 
       requestBody:
         required: true
         content:
           application/json:
             schema: 
-              $ref: '#/components/schemas/CreatePlayAgainst'
+              $ref: '#/components/schemas/PlayAgainst'
+      responses:
+        '200':
+          description: OK 
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/PlayAgainst'
+    get:
+      tags:
+        - "tournament"
+      operationId: getTournamentMatch
+      summary: get tournament match
+      parameters:
+        - name: date 
+          in: query
+          required: false
+          schema: 
+            type: string
       responses:
         '200':
           description: OK 
@@ -265,10 +281,7 @@ components:
       enum:
         - ADMIN 
         - SIMPLE
-        - VISITOR
-    CreateUser:
-      allOf:
-        - $ref: '#/components/schemas/User'
+   
     LoginInfo:
       properties:
         username:
@@ -281,6 +294,8 @@ components:
           type: string
     Booking:
       properties:
+        id:
+          type: integer
         createdAt:
           type: string
           format: date-time
@@ -291,39 +306,15 @@ components:
           type: string
           format: integer
         owner:
-          type: object
-          properties:
-            id:
-              type: integer
-            username:
-              type: string
-            phone:
-              type: string
+          type: string
         paying:
           $ref: '#/components/schemas/EnablePaying'
         status: 
           $ref: '#/components/schemas/EnableBooking'
-    CreateBooking:
-      properties:
-        startDatetime:
-          type: string
-          format: date-time
-        endDatetime:
-          type: integer
-        ownerId:
-          type: integer
-        statidum:
-          $ref: '#/components/schemas/Stadium'
-        paying:
-          $ref: '#/components/schemas/EnablePaying'
     Tournament:
-      allOf:
-        - properties:
-            id: 
-              type: integer
-        - $ref: '#/components/schemas/CreateTournament'
-    CreateTournament: 
       properties:
+        id:
+          type: integer
         name:
           type: string
         description:
@@ -350,7 +341,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Team'
-        datetime: 
+        startDatetime: 
+          type: string
+          format: date-time
+        sendDatetime: 
           type: string
           format: date-time
         tournament: 
@@ -363,22 +357,6 @@ components:
           $ref: '#/components/schemas/EnablePhase'
         statidum:
           $ref: '#/components/schemas/Stadium'
-        status: 
-          $ref: '#/components/schemas/EnableBooking'
-    CreatePlayAgainst:
-      properties:
-        teams:
-          items: 
-            type: integer
-        datetime: 
-          type: string
-          format: date-time
-        tournamentId: 
-          type: integer
-        stadiumId:
-          type: integer
-        phase: 
-          $ref: '#/components/schemas/EnablePhase'
         status: 
           $ref: '#/components/schemas/EnableBooking'
     EnablePhase:
@@ -402,6 +380,5 @@ components:
       type: string
       enum:
         - COMMING_SOOM
-        - NOW 
         - TERMINATE
         - CANCELLED
