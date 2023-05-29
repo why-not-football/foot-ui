@@ -66,13 +66,13 @@ export default function Create() {
             inputComplement={{ ...register("owner") }}
           />
           <InputField
-            type="number"
-            placeholder="34 89 184 52"
+            type="tel"
+            placeholder="034 89 184 52"
             id="phone-number"
             label="Your phone"
             startItem={
               <>
-                <span className="fi fi-mg"></span>(+261)
+                <span className="fi fi-mg"></span>
               </>
             }
           />
