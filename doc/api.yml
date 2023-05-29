@@ -124,26 +124,17 @@ paths:
       operationId: getAllBooking
       summary: get all booking
       parameters:
-        - name: ownerId
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: tournamentId
-          in: query
-          required: false
-          schema:
-            type: integer
-        - name: datetime
+        - name: date
           in: query
           required: false
           schema:
             type: string
-        - name: stadiumId
+            format: date
+        - name: status
           in: query
           required: false
-          schema:
-            type: integer
+          schema: 
+            $ref: '#/components/schemas/EnableBooking'
       responses:
         "200":
           description: OK
