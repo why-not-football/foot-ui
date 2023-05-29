@@ -20,6 +20,8 @@ export default function index() {
           right: "timeGridWeek,timeGridDay,listWeek"
         }}
         ref={calendarRef}
+        slotMinTime="07:00"
+        slotMaxTime="20:00"
         events={[
           { title: 'test1', start: '2023-05-28T12:30:00', end: '2023-05-28T13:30:00' },
           { title: 'test2', start: '2023-05-28T13:30:00', end: '2023-05-28T14:30:00' },
