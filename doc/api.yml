@@ -307,6 +307,8 @@ components:
           format: date-time
         owner:
           type: string
+        phone:
+          type: integer
         paying:
           $ref: "#/components/schemas/EnablePaying"
         status:
