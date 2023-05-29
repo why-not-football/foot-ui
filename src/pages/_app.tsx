@@ -4,7 +4,6 @@ import type { AppProps } from "next/app";
 import NavBar from "@/components/Navbar";
 import Head from "next/head";
 import "../styles/globals.css";
-import SideBar from "@/components/SideBar";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
