@@ -9,7 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 export default function Create() {
     const schema = yup.object({
-        owner: yup.string().required()
+        owner: yup.string().required(),
+        phone: yup.number().min(9).max(9)
     })
     const form = useForm<Booking>({
         mode:'all',
@@ -55,6 +56,11 @@ export default function Create() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={handleSubmit(onSubmit)}>
             <InputField type="text" id="your-name" label="Your name" inputComplement={{...register("owner")}}/>
+            <InputField type='number' 
+                placeholder='34 89 184 52'
+                id='phone-number' 
+                label='Your phone' 
+                startItem={<><span className="fi fi-mg"></span>(+261)</>}/>
             <div className='mt-4 flex'>
                 <div className='mr-2'>
                     <label htmlFor="start-date" className="block text-sm font-medium leading-6 text-gray-900">Start date</label>
