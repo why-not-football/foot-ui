@@ -62,12 +62,11 @@ const NavBar = () => {
                 />
               </li>
               <li>
-                <a
+                <CustomLink
                   className="text-gray-500 transition hover:text-gray-500/75"
                   href="/tournament"
-                >
-                  Tournament
-                </a>
+                  title="Tournament"
+                />
               </li>
             </ul>
           </nav>
