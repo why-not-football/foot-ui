@@ -269,7 +269,7 @@ components:
     User:
       properties:
         id:
-          type: integer
+          type: string
         username:
           type: string
         phone:
@@ -295,7 +295,7 @@ components:
     Booking:
       properties:
         id:
-          type: integer
+          type: string
         createdAt:
           type: string
           format: date-time
@@ -316,7 +316,7 @@ components:
     Tournament:
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
         description:
@@ -332,13 +332,13 @@ components:
     Team:
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
     PlayAgainst:
       properties:
         id:
-          type: integer
+          type: string
         teams:
           type: array
           items:
@@ -352,7 +352,7 @@ components:
         tournament:
           properties:
             id:
-              type: integer
+              type: string
             name:
               type: string
         phase:
@@ -371,7 +371,7 @@ components:
     Stadium:
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
     EnablePaying:
