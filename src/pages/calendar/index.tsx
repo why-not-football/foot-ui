@@ -20,6 +20,8 @@ export default function index() {
           right: "timeGridWeek,timeGridDay,listWeek",
         }}
         ref={calendarRef}
+        slotMinTime="07:00"
+        slotMaxTime="20:00"
         events={[
           {
             title: "test1",
