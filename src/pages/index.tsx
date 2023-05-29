@@ -27,10 +27,8 @@ const Home: NextPageWithLayout = () => {
             </h2>
 
             <p className="mt-4 text-gray-600">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui
-              hic atque tenetur quis eius quos ea neque sunt, accusantium soluta
-              minus veniam tempora deserunt? Molestiae eius quidem quam
-              repellat.
+              « Nowhere have I learned more about myself and others than on a soccer pitch. »
+              <b> Jorge Valdano</b>
             </p>
 
             <Link
