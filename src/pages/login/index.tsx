@@ -39,7 +39,7 @@ const Login = () => {
           You are new?
           <a
             href="/signup"
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            className="font-semibold leading-6 text-teal-600 hover:text-teal-500"
           >
             {" "}
             Register now
