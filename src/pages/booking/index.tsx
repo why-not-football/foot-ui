@@ -71,12 +71,14 @@ export default function Create() {
             id="your-name"
             label="Your name"
             inputComplement={{ ...register("owner") }}
+            error={(errors.owner?.message && "Your name is required")}
           />
           <InputField
             type="number"
             placeholder="034 89 184 52"
             id="phone-number"
             label="Your phone"
+            error={(errors.phone?.message && "Phone is required and be valid")}
             inputComplement={{...register("phone")}}
             startItem={
               <>
@@ -119,7 +121,6 @@ export default function Create() {
                 onSelect={() => {}}
                 onChange={(e) => {
                   setEndDate(e as Date);
-                  console.log(e);
                 }}
                 showTimeSelect
                 dateFormat="dd-MM-yyyy hh:mm aa"
