@@ -1,4 +1,4 @@
-import { Booking, EnableBooking } from "@/client";
+import { Booking, BookingApi, Configuration, EnableBooking } from "@/client";
 import InputField from "@/components/InputField";
 import React, { useEffect, useMemo, useState } from "react";
 import DatePicker from "react-datepicker";
@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 export default function Create() {
   const schema = yup.object({
     owner: yup.string().required(),
-    phone: yup.number().min(9).max(9),
+    phone: yup.number().min(10)
   });
   const form = useForm<Booking>({
     mode: "all",
@@ -21,6 +21,10 @@ export default function Create() {
     handleSubmit,
     formState: { errors },
   } = form;
+
+  useEffect(()=>{
+    console.log(errors)
+  }, [errors])
 
   const [endDate, setEndDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -41,13 +45,16 @@ export default function Create() {
   }, [startDate]);
 
   const onSubmit = (elt: Booking) => {
-    elt.id = undefined;
-    elt.createdAt = undefined;
-    elt.status = EnableBooking.CommingSoom;
+    elt.createdAt=(new Date).toISOString()
+    elt.owner=elt.owner
     elt.startDatetime = startDate.toISOString();
     elt.endDatetime = endDate.toISOString();
-    //PUT vers backend
-    console.log(elt);
+    elt.phone=elt.phone
+    elt.paying="CASH"
+    elt.status= "COMING_SOON" as EnableBooking
+    const conf = new Configuration()
+    const client = new BookingApi(conf)
+    client.createBooking(elt)
   };
 
   return (
@@ -66,10 +73,11 @@ export default function Create() {
             inputComplement={{ ...register("owner") }}
           />
           <InputField
-            type="tel"
+            type="number"
             placeholder="034 89 184 52"
             id="phone-number"
             label="Your phone"
+            inputComplement={{...register("phone")}}
             startItem={
               <>
                 <span className="fi fi-mg"></span>
@@ -89,7 +97,6 @@ export default function Create() {
                 onSelect={() => {}}
                 onChange={(e) => {
                   setStartDate(e as Date);
-                  console.log(e);
                 }}
                 showTimeSelect
                 dateFormat="dd-MM-yyyy hh:mm aa"
