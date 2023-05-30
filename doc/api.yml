@@ -3,7 +3,7 @@ info:
   title: Why not football ?
   version: "1.0"
 servers:
-  - url: https://localhost:8080
+  - url: http://localhost:3001
 security:
   - BearerAuth: []
 
@@ -268,7 +268,7 @@ components:
   schemas:
     User:
       properties:
-        id:
+        _id:
           type: integer
         username:
           type: string
@@ -294,7 +294,7 @@ components:
           type: string
     Booking:
       properties:
-        id:
+        _id:
           type: integer
         createdAt:
           type: string
@@ -315,7 +315,7 @@ components:
           $ref: "#/components/schemas/EnableBooking"
     Tournament:
       properties:
-        id:
+        _id:
           type: integer
         name:
           type: string
@@ -331,13 +331,13 @@ components:
           format: date
     Team:
       properties:
-        id:
+        _id:
           type: integer
         name:
           type: string
     PlayAgainst:
       properties:
-        id:
+        _id:
           type: integer
         teams:
           type: array
@@ -351,7 +351,7 @@ components:
           format: date-time
         tournament:
           properties:
-            id:
+            _id:
               type: integer
             name:
               type: string
@@ -370,7 +370,7 @@ components:
         - FINAL
     Stadium:
       properties:
-        id:
+        _id:
           type: integer
         name:
           type: string
