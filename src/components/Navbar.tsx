@@ -1,9 +1,7 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import footLogo from "./Icons";
+import React, { useState } from "react";
 import Football from "./Icons";
 interface propsType {
   title: string;
@@ -29,6 +27,11 @@ const CustomLink = (props: propsType) => {
 };
 
 const NavBar = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
   return (
     <header aria-label="Site Header" className="bg-white">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -61,12 +64,30 @@ const NavBar = () => {
                   title="Calendar"
                 />
               </li>
-              <li>
-                <CustomLink
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                  href="/tournament"
-                  title="Tournament"
-                />
+              <li className="relative group">
+                <button
+                  className="text-gray-500 transition hover:text-gray-500/75 flex items-center"
+                  onClick={toggleDropdown}
+                >
+                  Tournament
+                  <span className="ml-1 "> &darr;</span>
+                </button>
+                {isDropdownOpen && (
+                  <ul className="absolute left-0 mt-2 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg z-10">
+                    <li className="py-2 px-4">
+                      <Link href="/tournament">
+                        <span className="block text-gray-700 hover:text-gray-900 w-10">
+                          Create
+                        </span>
+                      </Link>
+                      <Link href="/tournament/list" passHref>
+                        <span className="block text-gray-700 hover:text-gray-900 w-10">
+                          View
+                        </span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </nav>
