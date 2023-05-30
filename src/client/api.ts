@@ -34,7 +34,7 @@ export interface Booking {
      * @type {number}
      * @memberof Booking
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
@@ -59,6 +59,12 @@ export interface Booking {
      * @memberof Booking
      */
     'owner'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Booking
+     */
+    'phone'?: number;
     /**
      * 
      * @type {EnablePaying}
@@ -175,7 +181,7 @@ export interface PlayAgainst {
      * @type {number}
      * @memberof PlayAgainst
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {Array<Team>}
@@ -232,7 +238,7 @@ export interface PlayAgainstTournament {
      * @type {number}
      * @memberof PlayAgainstTournament
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
@@ -251,7 +257,7 @@ export interface Stadium {
      * @type {number}
      * @memberof Stadium
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
@@ -270,7 +276,7 @@ export interface Team {
      * @type {number}
      * @memberof Team
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
@@ -289,7 +295,7 @@ export interface Tournament {
      * @type {number}
      * @memberof Tournament
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
@@ -332,7 +338,7 @@ export interface User {
      * @type {number}
      * @memberof User
      */
-    'id'?: number;
+    '_id'?: number;
     /**
      * 
      * @type {string}
