@@ -3,10 +3,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 import FullCalendar from "@fullcalendar/react";
-import React from "react";
+import React, { useEffect } from "react";
+import useCalendar from "@/hooks/useCalendar";
 
 export default function index() {
   const calendarRef = React.useRef(null);
+  const { data } = useCalendar()
 
   return (
     <div>
@@ -22,23 +24,16 @@ export default function index() {
         ref={calendarRef}
         slotMinTime="07:00"
         slotMaxTime="20:00"
-        events={[
-          {
-            title: "test1",
-            start: "2023-05-28T12:30:00",
-            end: "2023-05-28T13:30:00",
-          },
-          {
-            title: "test2",
-            start: "2023-05-28T13:30:00",
-            end: "2023-05-28T14:30:00",
-          },
-          {
-            title: "test3",
-            start: "2023-05-28T14:30:00",
-            end: "2023-05-28T15:30:00",
-          },
-        ]}
+        events={
+          data?.map(element => {
+            return {
+              title: element.owner,
+              start: element.startDatetime,
+              end: element.endDatetime,
+              color: "green"
+            }
+          })
+        }
         height="90vh"
       />
     </div>
